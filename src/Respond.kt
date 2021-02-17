@@ -44,6 +44,8 @@ class Respond(val call: ApplicationCall, val db: SQLite) {
         return FromJSON(call.receive())
     }
 
+    fun <T : Any> fromJson(parameters: T) = FromJSON(parameters)
+
     inner class FromJSON<T: Any>(val param: T) {
         private fun insertObj(sql: String, param: Any, result: MutableList<Long>) {
             val par = param.javaClass.declaredFields.map {
